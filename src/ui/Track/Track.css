@@ -1,0 +1,29 @@
+.track {
+  margin-bottom: 1px;
+}
+.track .popularity {
+  max-width: 343px;
+  width: 343px;
+  height: 40px;
+  background-color: rgb(0, 0, 0, 0.2);
+}
+
+/* .track .name {
+  max-width: 343px;
+  width: 343px;
+  height: 40px;
+  background-color: rgb(0, 0, 0, 0.2);
+} */
+
+.track .popularity span {
+  width: 343px;
+  color: #000;
+  font-weight: 500;
+  font-family: Futura;
+  font-size: 20px;
+  line-height: 40px;
+  padding-left: 10px;
+  position: absolute;
+  height: 40px;
+  overflow: hidden;
+}

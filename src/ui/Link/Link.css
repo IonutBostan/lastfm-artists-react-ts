@@ -1,0 +1,18 @@
+a.header-link {
+  font-weight: 500;
+  font-family: Futura;
+  color: #fff !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+a.header-link:hover {
+  text-decoration: underline !important;
+}
+
+ul.reset {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}

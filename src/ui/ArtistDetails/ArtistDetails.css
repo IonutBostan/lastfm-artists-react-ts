@@ -1,0 +1,106 @@
+.modal-overlay {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0);
+  display: block;
+}
+
+.modal-overlay.not-active {
+  width: 0;
+  height: 0;
+  transition: 0.5s 0.3s ease;
+}
+
+.modal-overlay.active {
+  width: 100%;
+  height: 100%;
+  transition: 0.5 ease;
+}
+
+.modal-overlay .artist-details {
+  position: absolute;
+  background-color: rgb(255, 255, 255, 0.8);
+  width: 750px;
+  height: 600px;
+  padding: 30px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 100px 0 rgba(250, 250, 250, 0.5);
+}
+
+.modal-overlay.not-active .artist-details {
+  opacity: 0;
+  transition: 0.3s ease;
+}
+.modal-overlay.active .artist-details {
+  opacity: 1;
+  transition: 0.5s 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    position: fixed;
+  }
+  .modal-overlay .artist-details {
+    position: relative;
+    width: -webkit-fill-available;
+    height: 100%;
+    overflow-x: auto;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+  .modal-overlay.active .artist-details {
+    opacity: 0.8;
+    transition: 0.5s 0.3s ease;
+  }
+  .artist-details .row {
+    flex-direction: column-reverse;
+  }
+  .artist-details .bio {
+    padding-bottom: 20px;
+  }
+}
+
+.artist-details .name {
+  font-weight: 500;
+  font-family: Futura;
+  color: #000;
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.artist-details .bio {
+  font-weight: 500;
+  font-family: Futura;
+  color: #000;
+  font-size: 14px;
+}
+
+.artist-details .bio a {
+  font-weight: 500;
+  font-family: Futura;
+  color: #000;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.artist-details .close {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
+.artist-container {
+  position: relative;
+  height: 600px;
+}

@@ -16,7 +16,7 @@ const successAction = { type: c.TEST_SUCCESS };
 const failureAction = { type: c.TEST_FAILURE, payload: { error: "error" } };
 
 describe("createReducer", () => {
-  const handlers = { [c.TEST_REQUEST]: (state, action) => true };
+  const handlers = { [c.TEST_REQUEST]: () => true };
   it("should return a reducer", () => {
     expect(createReducer(false, handlers)).toBeInstanceOf(Function);
   });

@@ -1,11 +1,13 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 import "./AppHeader.css";
 
 /**
  * Header component for country name
  */
-const AppHeader = ({ children }) => <h1 className="app-header">{children}</h1>;
+const AppHeader: React.SFC = ({ children }) => (
+  <h1 className="app-header">{children}</h1>
+);
 
 AppHeader.propTypes = {
   /** Country name */

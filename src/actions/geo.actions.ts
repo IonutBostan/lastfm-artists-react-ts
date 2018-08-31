@@ -1,11 +1,12 @@
 import { RSAA } from "redux-api-middleware";
 import { c } from "../constants";
+import { IRSAA } from "../interfaces";
 import { getResourceByCountry } from "./actionsUtils";
 
-const getTopArtistsUrl = country =>
+const getTopArtistsUrl = (country: string): string =>
   getResourceByCountry(country, "geo.gettopartists", 12);
 
-export const getTopArtists = country => {
+export const getTopArtists = (country: string): IRSAA => {
   return {
     [RSAA]: {
       types: [

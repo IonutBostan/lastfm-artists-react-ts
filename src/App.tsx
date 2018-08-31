@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { Redirect, Route, Router, Switch } from "react-router";
 import { history } from "./history";
 import Landing from "./pages/Landing";
 
-class App extends Component {
-  render() {
+class App extends React.Component<{}, {}> {
+  public render() {
     return (
       <React.Fragment>
         <Router history={history}>
           <Switch>
-            <Route exact path="/:country" component={Landing} />
+            <Route exact={true} path="/:country" component={Landing} />
             <Redirect to="/spain" />
           </Switch>
         </Router>

@@ -1,20 +1,29 @@
 import cn from "classnames";
-import Parser from "html-react-parser";
-import PropTypes from "prop-types";
-import React from "react";
+import * as Parser from "html-react-parser";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 import { Track } from "../";
+import { IArtistDetails, ITrack } from "../../interfaces";
 import "./ArtistDetails.css";
+
+interface IModal {
+  active: boolean;
+  onClose: any;
+}
 
 /**
  * ArtistDetails component the name, bio and the tracks of an artist
  */
-const ArtistDetails = ({ name, bio, tracks, onClose, active }) => (
+const ArtistDetails: React.SFC<IArtistDetails & IModal> = ({
+  name,
+  bio,
+  tracks,
+  onClose,
+  active
+}) => (
   <div className={cn("modal-overlay", { active, "not-active": !active })}>
     <div className="artist-details">
-      <div
-        className="close"
-        onClick={() => typeof onClose === "function" && onClose()}
-      >
+      <div className="close" onClick={onClose}>
         <CloseButtonSVG />
       </div>
       <div className="name">{name}</div>
@@ -34,31 +43,37 @@ const ArtistDetails = ({ name, bio, tracks, onClose, active }) => (
 
 ArtistDetails.propTypes = {
   /** The artist's name */
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   /** The artist's bio summary */
-  bio: PropTypes.string,
+  bio: PropTypes.string.isRequired,
   /** The artist's top 10 tracks  */
   tracks: PropTypes.arrayOf(
     PropTypes.shape({
       /** Track name */
       name: PropTypes.string.isRequired,
       /** Track rank */
-      rank: PropTypes.number.isRequired,
+      rank: PropTypes.string.isRequired,
       /** Track popularity from 0 to 1 calculated as currentSongListeners/firstSongListeners */
       popularity: PropTypes.number.isRequired
-    })
-  ),
+    }).isRequired
+  ).isRequired,
   /** onClick callback function */
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   /** Component status, used for animation */
-  active: PropTypes.bool
+  active: PropTypes.bool.isRequired
+  // mbid: PropTypes.string.isRequired,
+  // image: PropTypes.string.isRequired
 };
 
-class TopTracks extends React.Component {
-  render() {
+class TopTracks extends React.Component<{ data: ITrack[] }, {}> {
+  public render() {
     const { data } = this.props;
-    if (!data || data.constructor !== Array) { return null; }
-    if (data.length <= 0) { return null; }
+    if (!data || data.constructor !== Array) {
+      return null;
+    }
+    if (data.length <= 0) {
+      return null;
+    }
 
     const tracks = data.map((track, index) => <Track key={index} {...track} />);
 

@@ -1,10 +1,12 @@
 import { shallow } from "enzyme";
-import React from "react";
+import * as React from "react";
 import ArtistBlock from "./ArtistBlock";
 
 describe("ArtistBlock", () => {
   const component = shallow(
     <ArtistBlock
+      onClick={null}
+      mbid="mbid"
       name="David Bowie"
       image="https://lastfm-img2.akamaized.net/i/u/300x300/537b95bcec2b4121977858bb88f36974.png"
     />

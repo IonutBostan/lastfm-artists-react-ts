@@ -7,7 +7,7 @@ describe("artistInfoResource", () => {
       type: c.ARTIST_INFO_REQUEST,
       payload: { artist: { name: "David Bowie" } }
     };
-    expect(artistInfoResource({}, action)).toEqual(
+    expect(artistInfoResource(undefined, action)).toEqual(
       expect.objectContaining({
         artistInfo: null
       })
@@ -37,7 +37,7 @@ describe("artistInfoResource", () => {
       artistInfoResource({ artistInfo: { name: "David" } }, action)
     ).toEqual(
       expect.objectContaining({
-        artistInfo: {}
+        artistInfo: null
       })
     );
   });
@@ -49,7 +49,7 @@ describe("artistInfoResource", () => {
     };
     expect(artistInfoResource([], action)).toEqual(
       expect.objectContaining({
-        artistInfo: {}
+        artistInfo: null
       })
     );
   });

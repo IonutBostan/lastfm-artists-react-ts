@@ -1,11 +1,12 @@
 import cn from "classnames";
-import React from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { getArtistInfo, getTopTracks } from "../actions/artist.actions";
 import { getTopArtists } from "../actions/geo.actions";
 import Menu from "../components/Menu";
 import TopArtists from "../components/TopArtists";
 import { history } from "../history";
+import { IArtistInfoResource } from "../interfaces";
 import {
   getArtistInfoResource,
   getTopArtistsResource,
@@ -19,44 +20,48 @@ const countries = [
   { name: "Italy", id: "italy" },
   { name: "Germany", id: "germany" }
 ];
+interface ILandingProps {
+  getArtistInfo: (mbid: string) => void;
+  getTopTracks: (mbid: string) => void;
+  topArtistsResource: any;
+  topTracksResource: any;
+  artistInfoResource: IArtistInfoResource;
+  match: any;
+}
 
-class Landing extends React.Component {
-  state = { details: false, country: null };
+interface ILandingState {
+  details: boolean;
+  country: string | null;
+}
 
-  static getDerivedStateFromProps(props, state) {
-    let { country } = props.match.params;
+class Landing extends React.Component<ILandingProps, ILandingState> {
+  public static getDerivedStateFromProps(props: any, state: any) {
+    const { country } = props.match.params;
 
     if (state.country !== country) {
       props.getTopArtists(country);
     }
 
-    return { ...state, country: country };
+    return { ...state, country };
+  }
+  public constructor(props: ILandingProps) {
+    super(props);
+    this.state = { details: false, country: null };
+    this.onMenuClick = this.onMenuClick.bind(this);
+    this.onArtistClick = this.onArtistClick.bind(this);
+    this.onModalClose = this.onModalClose.bind(this);
   }
 
-  onMenuClick(country) {
-    history.push("/" + country);
-  }
-
-  onArtistClick(mbid) {
-    this.props.getArtistInfo(mbid);
-    this.props.getTopTracks(mbid);
-    this.setState({ ...this.state, details: true });
-  }
-
-  onModalClose() {
-    this.setState({ ...this.state, details: false });
-  }
-
-  render() {
-    let { country } = this.props.match.params;
-    let {
+  public render() {
+    const { country } = this.props.match.params;
+    const {
       topArtistsResource,
       topTracksResource,
       artistInfoResource
     } = this.props;
-    let { topArtists } = topArtistsResource;
-    let { topTracks } = topTracksResource;
-    let { artistInfo } = artistInfoResource;
+    const { topArtists } = topArtistsResource;
+    const { topTracks } = topTracksResource;
+    const { artistInfo } = artistInfoResource;
 
     return (
       <div>
@@ -69,28 +74,38 @@ class Landing extends React.Component {
           <Menu
             data={countries}
             active={country}
-            onMenuClick={this.onMenuClick.bind(this)}
+            onMenuClick={this.onMenuClick}
           />
-          <TopArtists
-            data={topArtists}
-            onArtistClick={this.onArtistClick.bind(this)}
-          />
+          <TopArtists data={topArtists} onArtistClick={this.onArtistClick} />
         </div>
         <div className="modal-container">
           <ArtistDetails
             active={this.state.details}
             {...artistInfo}
             tracks={topTracks}
-            onClose={this.onModalClose.bind(this)}
+            onClose={this.onModalClose}
           />
         </div>
       </div>
     );
   }
+  private onMenuClick(country: string) {
+    history.push("/" + country);
+  }
+
+  private onArtistClick(mbid: string) {
+    this.props.getArtistInfo(mbid);
+    this.props.getTopTracks(mbid);
+    this.setState({ ...this.state, details: true });
+  }
+
+  private onModalClose() {
+    this.setState({ ...this.state, details: false });
+  }
 }
 
 export default connect(
-  store => ({
+  (store: any) => ({
     topArtistsResource: getTopArtistsResource(store),
     topTracksResource: getTopTracksResource(store),
     artistInfoResource: getArtistInfoResource(store)

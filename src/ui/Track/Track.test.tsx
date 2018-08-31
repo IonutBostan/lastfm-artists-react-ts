@@ -1,10 +1,10 @@
 import { shallow } from "enzyme";
-import React from "react";
+import * as React from "react";
 import Track from "./Track";
 
 describe("Track", () => {
   const component = shallow(
-    <Track popularity={0.5} name="Ziggy Stardust" rank={1} />
+    <Track popularity={0.5} name="Ziggy Stardust" rank="1" />
   );
   it("should contain the Track text", () => {
     expect(component.text()).toBe("1 Ziggy Stardust");

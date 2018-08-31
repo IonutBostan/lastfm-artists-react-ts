@@ -1,4 +1,6 @@
-export const c = {
+import { IConstant } from "./interfaces";
+
+export const c: IConstant = {
   ARTIST_INFO_REQUEST: "ARTIST_INFO_REQUEST",
   ARTIST_INFO_SUCCESS: "ARTIST_INFO_SUCCESS",
   ARTIST_INFO_FAILURE: "ARTIST_INFO_FAILURE",

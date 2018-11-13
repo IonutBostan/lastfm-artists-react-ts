@@ -1,7 +1,7 @@
 import cn from "classnames";
-import * as Parser from "html-react-parser";
-import * as PropTypes from "prop-types";
-import * as React from "react";
+import Parser from "html-react-parser";
+import PropTypes from "prop-types";
+import React from "react";
 import { Track } from "../";
 import { IArtistDetails, ITrack } from "../../interfaces";
 import "./ArtistDetails.css";

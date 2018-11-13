@@ -332,3 +332,4 @@ package-lock.json
 yarn.lock
 .env.local
 coverage/
+.env.test

@@ -1,5 +1,5 @@
 import cn from "classnames";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { getArtistInfo, getTopTracks } from "../actions/artist.actions";
 import { getTopArtists } from "../actions/geo.actions";

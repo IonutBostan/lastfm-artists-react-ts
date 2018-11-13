@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Link } from "../ui";
 
 interface ICountry {
@@ -19,13 +19,15 @@ class Menu extends React.PureComponent<IMenuProps, {}> {
       return null;
     }
 
-    const links = data.filter(country => country.id !== active).map(country => (
-      <li key={country.id}>
-        <Link onClick={this.onMenuClick.bind(this, country.id)}>
-          {country.name}
-        </Link>
-      </li>
-    ));
+    const links = data
+      .filter(country => country.id !== active)
+      .map(country => (
+        <li key={country.id}>
+          <Link onClick={this.onMenuClick.bind(this, country.id)}>
+            {country.name}
+          </Link>
+        </li>
+      ));
 
     return (
       <div className="menu">

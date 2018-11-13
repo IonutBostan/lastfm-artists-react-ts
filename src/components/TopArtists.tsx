@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { IArtist } from "../interfaces";
 import { ArtistBlock } from "../ui";
 

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router";
 import { history } from "./history";
 import Landing from "./pages/Landing";

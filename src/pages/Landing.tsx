@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { getArtistInfo, getTopTracks } from "../actions/artist.actions";
 import { getTopArtists } from "../actions/geo.actions";
@@ -12,7 +12,9 @@ import {
   getTopArtistsResource,
   getTopTracksResource
 } from "../reducers";
-import { AppHeader, ArtistDetails } from "../ui";
+import { AppHeader } from "../ui";
+
+const ArtistDetails = lazy(() => import("../ui/ArtistDetails/ArtistDetails"));
 
 const countries = [
   { name: "Spain", id: "spain" },
@@ -79,12 +81,16 @@ class Landing extends React.Component<ILandingProps, ILandingState> {
           <TopArtists data={topArtists} onArtistClick={this.onArtistClick} />
         </div>
         <div className="modal-container">
-          <ArtistDetails
-            active={this.state.details}
-            {...artistInfo}
-            tracks={topTracks}
-            onClose={this.onModalClose}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            {this.state.details ? (
+              <ArtistDetails
+                active={this.state.details}
+                {...artistInfo}
+                tracks={topTracks}
+                onClose={this.onModalClose}
+              />
+            ) : null}
+          </Suspense>
         </div>
       </div>
     );

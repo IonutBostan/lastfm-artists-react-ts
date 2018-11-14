@@ -333,3 +333,4 @@ yarn.lock
 .env.local
 coverage/
 .env.test
+build/

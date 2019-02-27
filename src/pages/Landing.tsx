@@ -34,6 +34,14 @@ interface ILandingState {
   country: string | null;
 }
 
+
+
+@(connect((store: any) => ({
+  topArtistsResource: getTopArtistsResource(store),
+  topTracksResource: getTopTracksResource(store),
+  artistInfoResource: getArtistInfoResource(store)
+}),
+{ getTopArtists, getTopTracks, getArtistInfo }) as any)
 class Landing extends React.Component<ILandingProps, ILandingState> {
   public static getDerivedStateFromProps(props: any, state: any) {
     const { country } = props.match.params;
@@ -104,11 +112,13 @@ class Landing extends React.Component<ILandingProps, ILandingState> {
   }
 }
 
-export default connect(
-  (store: any) => ({
-    topArtistsResource: getTopArtistsResource(store),
-    topTracksResource: getTopTracksResource(store),
-    artistInfoResource: getArtistInfoResource(store)
-  }),
-  { getTopArtists, getTopTracks, getArtistInfo }
-)(Landing);
+export default Landing;
+
+// export default connect(
+//   (store: any) => ({
+//     topArtistsResource: getTopArtistsResource(store),
+//     topTracksResource: getTopTracksResource(store),
+//     artistInfoResource: getArtistInfoResource(store)
+//   }),
+//   { getTopArtists, getTopTracks, getArtistInfo }
+// )(Landing);
